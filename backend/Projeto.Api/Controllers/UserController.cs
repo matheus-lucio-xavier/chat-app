@@ -20,7 +20,6 @@ namespace Projeto.Api.Controllers
 
         [HttpGet("usuarios")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [AllowAnonymous]
         public async Task<IActionResult> GetUser()
         {
             var response = await _service.Consultar();

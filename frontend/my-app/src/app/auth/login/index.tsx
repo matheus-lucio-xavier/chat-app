@@ -5,6 +5,8 @@ import { useState } from "react"
 import { Link, router, Router } from "expo-router"
 import { styles } from "../../../styles/login.styles"
 import { login } from "@/services/authService"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
 
 export default function Login(){
     const [email, setEmail] = useState("")
@@ -16,7 +18,13 @@ export default function Login(){
         try{
             const response = await login(email, password)
 
+            const token = response.data.token
+
+            await AsyncStorage.setItem("token", token)
+
             Alert.alert(`Login efetuado com ${response.data.usuario.nome}`)
+            console.log(response.data)
+            router.replace("/app/home")
         }catch (error: any) {
             if (error.response) {
                 // erro vindo da API (400, 401, etc)
@@ -29,7 +37,6 @@ export default function Login(){
                 Alert.alert("Erro de conexão")
             }
         }
-
     }
 
 
