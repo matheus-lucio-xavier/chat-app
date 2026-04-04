@@ -43,7 +43,7 @@ namespace Projeto.Api.Controllers
         [AllowAnonymous] // Registro padrão é público e cria usuário profissional
         [ProducesResponseType(typeof(ResponseAuthRegisterJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RegisterMedico([FromBody] RequestAuthRegisterJson request)
+        public async Task<IActionResult> Register([FromBody] RequestAuthRegisterJson request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
