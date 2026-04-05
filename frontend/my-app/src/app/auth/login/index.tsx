@@ -6,17 +6,30 @@ import { Link, router, Router } from "expo-router"
 import { styles } from "../../../styles/login.styles"
 import { login } from "@/services/authService"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { Form } from "@/components/form"
+
+const props = [
+    {
+        name: "email",
+        type: "text",
+        icon: "mail",
+        placeholder: "Digite seu email"
+    },
+    {
+        name: "password",
+        type: "password",
+        icon: "lock-closed",
+        placeholder: "Digite sua senha"
+    }
+] as const
 
 
 export default function Login(){
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
 
-
-    const handleLogIn = async () => {
+    const handleLogin = async (data: Record<string, string>) => {
 
         try{
-            const response = await login(email, password)
+            const response = await login(data.email, data.password)
 
             const token = response.data.token
 
@@ -47,23 +60,12 @@ export default function Login(){
 
                     <Text style={styles.title}>Entrar</Text>
                     <Text style={styles.subtitle}>accese sua conta com e-mail e senha</Text>
-                    
-                    <View style={styles.form}>
-                        <Input
-                            type="text"
-                            icon="person"
-                            placeholder="E-mail"
-                            onChangeText={setEmail}
-                            keyboardType="email-address"
-                        />
-                        <Input
-                            type="password"
-                            icon="pencil"
-                            placeholder="Senha"
-                            onChangeText={setPassword}
-                        />
-                        <Button label="entrar" onPress={handleLogIn}/>
-                    </View>
+
+                    <Form 
+                        inputs={props}
+                        onSubmit={handleLogin}
+                        labelSubmit="Entrar"
+                    />
 
                     <Text style={styles.footerText}>
                         Não tem uma conta? <Link style={styles.footerLink} href={"/auth/signup"}>cadastre-se!</Link>
