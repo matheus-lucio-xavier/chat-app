@@ -9,6 +9,6 @@ namespace Projeto.Domain.Interfaces
     public interface IConversaRepository : IRepository
     {
         Task<ConversaModel?> ConsultarConversaCompleta(Guid id);
-        Task<IQueryable<MensagemModel>?> ConsultarMensagens(Guid id);
+        IQueryable<MensagemModel> ConsultarMensagens(Guid id);
     }
 }

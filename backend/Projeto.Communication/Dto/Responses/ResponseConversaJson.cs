@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Projeto.Communication.Enum;
 
-namespace Projeto.Communication.Dto.Requests
+namespace Projeto.Communication.Dto.Responses
 {
-    public class RequestConversaRegisterJson
+    public class ResponseConversaJson
     {
         public Guid Id { get; set; }
         public ConversaTypeEnum Type { get; set; }	

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Projeto.Communication.Dto.Requests;
 using Projeto.Communication.Dto.Responses;
 using Projeto.Domain.Entities;
 
@@ -10,17 +11,16 @@ namespace Projeto.Application.Services.Conversa
     public interface IConversaService
     {
 
-        Task<List<UserModel>> Consultar();
+        Task<List<ConversaModel>> Consultar();
 
         // Nullable pois o usuário pode não ser encontrado
-        Task<ServiceResponse<UserModel>> ConsultarId(Guid id);
-
-        Task<ServiceResponse<ResponseUserJson>> Cadastrar(RequestUserRegisterJson user);
-        Task<ServiceResponse<ResponseUserJson>> Editar(RequestUserRegisterJson user);
-
-        // Nullable pois retorna null se o usuário não existir
-        Task<ServiceResponse<ResponseUserJson>> Deletar(Guid id);
-        Task<ConversaModel?> ConsultarConversaCompleta(Guid id);
-        Task<IQueryable<MensagemModel>?> ConsultarMensagens(Guid id);
+        Task<ServiceResponse<ConversaModel>> ConsultarId(Guid id);
+        Task<ServiceResponse<ConversaModel>> ConsultarConversaCompleta(Guid id);
+        Task<ServiceResponse<List<ResponseMensagemJson>>> ConsultarMensagens(Guid id);
+        Task<ServiceResponse<ResponseConversaJson>> Cadastrar(RequestConversaRegisterJson user);
+        Task<ServiceResponse<ResponseMembroJson>> AdcionarMembro(Guid conversaId, Guid userId);
+        Task<ServiceResponse<ResponseMensagemJson>> adcionarMensagem(Guid conversaId, Guid userId, RequestMensagemRegisterJson mensagem);
+        Task<ServiceResponse<ResponseConversaJson>> Editar(RequestConversaRegisterJson conversa);
+        Task<ServiceResponse<ResponseConversaJson>> Deletar(Guid id);
     }
 }

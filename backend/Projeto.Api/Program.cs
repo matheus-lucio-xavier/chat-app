@@ -5,6 +5,7 @@ using Projeto.Infrastructure.Repository;
 using Projeto.Application.Services;
 using Projeto.Application.Services.Auth;
 using Projeto.Application.Services.User;
+using Projeto.Application.Services.Conversa;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -34,11 +35,13 @@ builder.Services.AddFluentValidationAutoValidation();
 
 // repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IConversaRepository, ConversaRepository>();
 builder.Services.AddScoped<IRepository, Repository>();
 
 // services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IConversaService, ConversaService>();
 
 // unit of work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); 

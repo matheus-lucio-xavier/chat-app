@@ -11,10 +11,10 @@ namespace Projeto.Domain.Entities
         public Guid Id { get; set; }
 
         public Guid OrigemId { get; set; }
-        public required UserModel Origem { get; set; }
+        public UserModel Origem { get; set; } = null!;
         
         public Guid ConversaId { get; set; }
-        public required ConversaModel Conversa { get; set; }
+        public ConversaModel Conversa { get; set; } = null!;
         public MensagemTypeEnum Type { get; set; }
         public required string Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow; 

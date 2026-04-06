@@ -6,10 +6,10 @@ using Projeto.Communication.Enum;
 
 namespace Projeto.Communication.Dto.Requests
 {
-    public class RequestConversaRegisterJson
+    public class RequestMensagemRegisterJson
     {
         public Guid Id { get; set; }
-        public ConversaTypeEnum Type { get; set; }	
-        public required string Nome { get; set; }
+        public MensagemTypeEnum Type { get; set; }
+        public required string Content { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Projeto.Infrastructure.Repository
             .Include(c => c.Mensagens)
             .FirstOrDefaultAsync(c => c.Id == id);
         }
-        public async Task<IQueryable<MensagemModel>?> ConsultarMensagens(Guid id)
+        public IQueryable<MensagemModel> ConsultarMensagens(Guid id)
         {
             return _appDbContext.Mensagens
                 .Where(m => m.ConversaId == id)
