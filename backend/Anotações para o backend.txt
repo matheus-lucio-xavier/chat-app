@@ -1,0 +1,13 @@
+Anotações para o backend:
+
+ConversaService precisa: 
+- de metodo para acessar os membros presentes na conversa
+- quando criada uma conversa o usuário que a criou deve ser definido como membro por padrão
+- verificar se usuário é membros antes de postar mensagem
+- verificar se usuário é membros antes de consultar as mensagens
+- verificar se usuário é membro da conversa antes de adicionar membro
+- quando criado um conversa privada ela adciona mais 1 membro além do próprio usuário logado(pra que não precise criar     uma conversa e so depois adcionar um usuário de forma separada)
+- quando criando um grupo/conversa com múltiplos usuarios ela é criada apenas com o usuário que esta logado como primeiro membro outros membros podem ser adcionados pelo proprio usuário
+
+UserService precisa:
+- de um método para acessar as conversa em que ele esteja presente

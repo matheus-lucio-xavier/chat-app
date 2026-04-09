@@ -29,6 +29,14 @@ namespace Projeto.Infrastructure.Repository
             .FirstOrDefaultAsync(c => c.Id == id);
 
         }
+
+        public IQueryable<ConversaModel> ConsultarConversas(Guid id)
+        {
+            return _appDbContext.MembrosConversas
+                .Where(m => m.UserId == id)
+                .Select(m => m.Conversa)
+                .OrderByDescending(m => m.CreatedAt);
+        }
         
     }
 }
