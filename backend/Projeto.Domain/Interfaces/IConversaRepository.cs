@@ -8,7 +8,8 @@ namespace Projeto.Domain.Interfaces
 {
     public interface IConversaRepository : IRepository
     {
-        Task<ConversaModel?> ConsultarConversaCompleta(Guid id);
         IQueryable<MensagemModel> ConsultarMensagens(Guid id);
+        IQueryable<UserModel> ConsultarMembros(Guid id);
+        Task<bool> UserPresente(Guid userId, Guid conversaId);
     }
 }

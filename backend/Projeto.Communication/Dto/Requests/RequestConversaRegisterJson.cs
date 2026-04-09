@@ -9,7 +9,6 @@ namespace Projeto.Communication.Dto.Requests
     public class RequestConversaRegisterJson
     {
         public Guid Id { get; set; }
-        public ConversaTypeEnum Type { get; set; }	
         public required string Nome { get; set; }
     }
 }

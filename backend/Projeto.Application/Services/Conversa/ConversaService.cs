@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Projeto.Communication.Dto.Requests;
 using Projeto.Communication.Dto.Responses;
+using Projeto.Communication.Enum;
 using Projeto.Domain.Entities;
 using Projeto.Domain.Interfaces;
 
@@ -56,13 +57,54 @@ namespace Projeto.Application.Services.Conversa
 
             return ServiceResponse<List<ResponseMensagemJson>>.Ok(mensagens);
         }
-        public async Task<ServiceResponse<ResponseConversaJson>> Cadastrar(RequestConversaRegisterJson conversa)
+
+        public async Task<ServiceResponse<List<ResponseUserJson>>> ConsultarMembros(Guid id)
+        {
+            var conversa = await _repository.ConsultarPorId<ConversaModel>(id);
+            if (conversa is null)
+                return ServiceResponse<List<ResponseUserJson>>.BadRequest("Essa converca nao existe");
+
+            var query = _repository.ConsultarMembros(id);
+
+            var users = await query.Select(m => new ResponseUserJson
+                {
+                    Id = m.Id,
+                    Nome = m.Nome,
+                    Email = m.Email
+                }).ToListAsync();
+
+            return ServiceResponse<List<ResponseUserJson>>.Ok(users);
+        }
+        public async Task<ServiceResponse<ResponseConversaJson>> CadastrarPrivado(RequestConversaRegisterJson conversa)
         {
 
             var novo = new ConversaModel
             {
                 Nome = conversa.Nome,
-                Type = conversa.Type
+                Type = ConversaTypeEnum.Privado
+            };
+
+            await _repository.Cadastrar(novo);
+            var saved = await _unit.Commit();
+
+            if (saved)
+                return ServiceResponse<ResponseConversaJson>.Ok(new ResponseConversaJson
+                { 
+                    Id = novo.Id,
+                    Type = novo.Type,
+                    Nome = novo.Nome
+                });
+
+            return ServiceResponse<ResponseConversaJson>.Error("Nao foi possivel cadastrar conversa");
+        }
+
+        public async Task<ServiceResponse<ResponseConversaJson>> CadastrarGrupo(RequestConversaRegisterJson conversa)
+        {
+
+            var novo = new ConversaModel
+            {
+                Nome = conversa.Nome,
+                Type = ConversaTypeEnum.Grupo
             };
 
             await _repository.Cadastrar(novo);

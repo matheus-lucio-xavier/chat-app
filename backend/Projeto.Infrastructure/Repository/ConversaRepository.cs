@@ -14,14 +14,6 @@ namespace Projeto.Infrastructure.Repository
         public ConversaRepository(AppDbContext appDbContext) : base(appDbContext)
         {
         }
-        public async Task<ConversaModel?> ConsultarConversaCompleta(Guid id)
-        {
-            return await _appDbContext.Conversas
-            .Include(u => u.Membros)
-                .ThenInclude(c => c.User)
-            .Include(c => c.Mensagens)
-            .FirstOrDefaultAsync(c => c.Id == id);
-        }
         public IQueryable<MensagemModel> ConsultarMensagens(Guid id)
         {
             return _appDbContext.Mensagens
@@ -30,11 +22,11 @@ namespace Projeto.Infrastructure.Repository
 
         }
 
-        public IQueryable<MembrosConversaModel> ConsultarMembros(Guid id)
+        public IQueryable<UserModel> ConsultarMembros(Guid id)
         {
             return _appDbContext.MembrosConversas
                 .Where(m => m.ConversaId == id)
-                .Include(m => m.User)
+                .Select(m => m.User)
                 .OrderByDescending(m => m.CreatedAt);
 
         }

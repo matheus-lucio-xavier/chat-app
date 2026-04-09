@@ -55,17 +55,46 @@ namespace Projeto.Api.Controllers
             return StatusCode(response.StatusCode, response.Message);
         }
 
-        [HttpPost("conversas")]
+        [HttpGet("conversas/{id}/membros")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetConversaMembros(Guid id)
+        {
+            var response = await _service.ConsultarMembros(id);
+            if (response.Success)
+                return StatusCode(response.StatusCode, response.Data);
+
+            return StatusCode(response.StatusCode, response.Message);
+        }
+
+        [HttpPost("conversas-privado")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PostConversa([FromBody] RequestConversaRegisterJson conversa)
+        public async Task<IActionResult> PostConversaPrivado([FromBody] RequestConversaRegisterJson conversa)
         // RequestConversaRegisterJson em vez de conversaModel
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var response = await _service.Cadastrar(conversa);
+            var response = await _service.CadastrarPrivado(conversa);
+            if (response.Success)
+                return StatusCode(response.StatusCode, response.Data);
+
+            return StatusCode(response.StatusCode, response.Message);
+        }
+
+        [HttpPost("conversas-grupo")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> PostConversaGrupo([FromBody] RequestConversaRegisterJson conversa)
+        // RequestConversaRegisterJson em vez de conversaModel
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _service.CadastrarGrupo(conversa);
             if (response.Success)
                 return StatusCode(response.StatusCode, response.Data);
 
