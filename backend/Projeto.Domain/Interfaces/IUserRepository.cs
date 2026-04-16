@@ -10,5 +10,6 @@ namespace Projeto.Domain.Interfaces
     {
         Task<UserModel?> ConsultarUsuarioPorEmail(string email);
         Task<UserModel?> ConsultarUsuarioCompleto(Guid id);
+        IQueryable<ConversaModel> ConsultarConversas(Guid id);
     }
 }

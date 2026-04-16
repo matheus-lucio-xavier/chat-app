@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto.Application.Services.User;
@@ -24,6 +25,19 @@ namespace Projeto.Api.Controllers
         {
             var response = await _service.Consultar();
             return Ok(response);
+        }
+
+        [HttpGet("usuarios/conversas")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetUserConversas()
+        {
+            var userLogadoId = GetUserId();
+
+            var response = await _service.ConsultarConversas(userLogadoId);
+            if (response.Success)
+                return StatusCode(response.StatusCode, response.Data);
+
+            return StatusCode(response.StatusCode, response.Message);
         }
 
         [HttpGet("usuarios/{id}")]
@@ -84,6 +98,19 @@ namespace Projeto.Api.Controllers
                 return StatusCode(response.StatusCode, response.Data);
 
             return StatusCode(response.StatusCode, response.Message);
+        }
+
+        private Guid GetUserId()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+                throw new UnauthorizedAccessException("Usuário não autenticado");
+
+            if (!Guid.TryParse(userId, out var id))
+                throw new Exception("Id do usuário inválido no token");
+
+            return id;
         }
     }
 }

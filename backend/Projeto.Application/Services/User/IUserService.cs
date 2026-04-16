@@ -11,6 +11,7 @@ namespace Projeto.Application.Services.User
     public interface IUserService
     {
         Task<List<UserModel>> Consultar();
+        Task<ServiceResponse<List<ResponseConversaJson>>> ConsultarConversas(Guid userLogadoId);
 
         // Nullable pois o usuário pode não ser encontrado
         Task<ServiceResponse<UserModel>> ConsultarId(Guid id);

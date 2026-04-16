@@ -10,8 +10,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using Projeto.Domain.Entities;
-using System.IdentityModel.Tokens.Jwt;
 using Projeto.Infrastructure.UnitOfWork;
 using FluentValidation;
 using FluentValidation.AspNetCore;

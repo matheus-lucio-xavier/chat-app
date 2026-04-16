@@ -24,6 +24,20 @@ namespace Projeto.Application.Services.User
                 .ToListAsync();
         }
 
+        public async Task<ServiceResponse<List<ResponseConversaJson>>> ConsultarConversas(Guid userLogadoId)
+        {
+            var query = _repository.ConsultarConversas(userLogadoId);
+
+            var conversas = await query.Select(c => new ResponseConversaJson
+                {
+                    Id = c.Id,
+                    Type = c.Type,
+                    Nome = c.Nome
+                }).ToListAsync();
+
+            return ServiceResponse<List<ResponseConversaJson>>.Ok(conversas);
+        }
+
         public async Task<ServiceResponse<UserModel>> ConsultarId(Guid id)
         {
             var user = await _repository.ConsultarPorId<UserModel>(id);
