@@ -4,6 +4,7 @@ import { View, Text, Alert, FlatList, TouchableOpacity } from "react-native";
 import { Button } from "@/components/button";
 import { styles } from "@/styles/home.styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store"
 import { router } from "expo-router";
 import { ConversationList } from "@/components/conversationList";
 
@@ -34,7 +35,8 @@ export default function Home(){
     const handleLogout = async () => {
 
         try{
-            await AsyncStorage.removeItem("token");
+            //await AsyncStorage.removeItem("token");
+            await SecureStore.deleteItemAsync("token")
             Alert.alert("Logout efetuado")
             router.replace("/")
         }catch (error: any) {

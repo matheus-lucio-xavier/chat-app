@@ -5,6 +5,7 @@ import { View, Text, ScrollView, KeyboardAvoidingView, Platform, Alert} from "re
 import { Link, router } from "expo-router"
 import { styles } from "../../../styles/signup.styles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as SecureStore from "expo-secure-store"
 import { register } from "@/services/authService"
 import { useState } from "react"
 
@@ -54,7 +55,8 @@ export default function Signup(){
 
             const token = response.data.token
 
-            await AsyncStorage.setItem("token", token)
+            //await AsyncStorage.setItem("token", token)
+            await SecureStore.setItemAsync("token", token)
 
             Alert.alert(`Login efetuado com ${response.data.usuario.email}`)
             console.log(response.data)

@@ -6,6 +6,7 @@ import { Link, router, Router } from "expo-router"
 import { styles } from "../../../styles/login.styles"
 import { login } from "@/services/authService"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as SecureStore from "expo-secure-store"
 import { Form } from "@/components/form"
 
 const props = [
@@ -33,7 +34,8 @@ export default function Login(){
 
             const token = response.data.token
 
-            await AsyncStorage.setItem("token", token)
+            //await AsyncStorage.setItem("token", token)
+            await SecureStore.setItemAsync("token", token)
 
             Alert.alert(`Login efetuado com ${response.data.usuario.nome}`)
             console.log(response.data)
