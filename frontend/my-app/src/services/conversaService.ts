@@ -13,7 +13,7 @@ export const getConversaMensagens = async (conversaId: string) => {
 }
 
 type requestMensagem = {
-    type: string;
+    type: number;
     content: string;
 };
 

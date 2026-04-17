@@ -1,6 +1,7 @@
 import { FlatList, View, Text } from "react-native";
 import { styles } from "@/styles/home.styles";
 import { MessageBubble } from "../MessageBubble";
+import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 
 type Mensagem = {
   id: string;
@@ -20,10 +21,6 @@ export function MessageList({ mensagens }: Props) {
       data={mensagens}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        //<View style={styles.message}>
-        //  <Text>{item.content}</Text>
-        //  <Text>{new Date(item.createdAt).toLocaleTimeString()}</Text>
-        //</View>
         <MessageBubble mensagem={item}/>
       )}
     />

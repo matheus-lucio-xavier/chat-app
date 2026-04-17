@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     padding: 10,
+    marginBottom: 10,
     borderTopWidth: 1,
     borderColor: "#ddd",
   },

@@ -13,6 +13,7 @@ export function MessageInput({ message, setMessage, onSend }: Props) {
       <TextInput
         style={styles.input}
         value={message}
+        multiline
         onChangeText={setMessage}
         placeholder="Digite uma mensagem..."
       />
