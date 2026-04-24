@@ -4,7 +4,21 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    padding: 16,
   },
+
+  buttonContainerAlt: {
+        height: 50,
+        width: "20%",
+        backgroundColor: "#007AFF",
+        borderRadius: 12,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 20,
+        marginBottom: 20,
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+        flexDirection: "row"
+    },
 
   chatItem: {
     padding: 15,

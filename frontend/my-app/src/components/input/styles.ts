@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        width: "100%",
+        width: "80%",
         height: 50,
         backgroundColor: "#D9D9D9",
         borderRadius: 12,
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
     },
     group: {
         width: "85%",

@@ -38,8 +38,7 @@ export default function Login(){
             await SecureStore.setItemAsync("token", token)
 
             Alert.alert(`Login efetuado com ${response.data.usuario.nome}`)
-            console.log(response.data)
-            router.replace("/app/home")
+            router.replace("/home")
         }catch (error: any) {
             if (error.response) {
                 // erro vindo da API (400, 401, etc)

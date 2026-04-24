@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { View, Text, Alert, FlatList, TouchableOpacity } from "react-native";
 import { Button } from "@/components/button";
 import { styles } from "@/styles/home.styles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from "expo-secure-store"
 import { router } from "expo-router";
 import { ConversationList } from "@/components/conversationList";
@@ -34,7 +33,6 @@ export default function Home(){
     const handleLogout = async () => {
 
         try{
-            //await AsyncStorage.removeItem("token");
             await SecureStore.deleteItemAsync("token")
             Alert.alert("Logout efetuado")
             router.replace("/")
@@ -61,16 +59,20 @@ export default function Home(){
     }, [])
 
     const handleConversationList = (id: string, nome: string) =>
-            router.push({
-              pathname: "/app/home/chat/[id]", // ajusta conforme sua estrutura
-              params: { 
-                    id: id,
-                    nome: nome
-                },
-            })
+        router.push({
+          pathname: "/home/chat/[id]", // ajusta conforme sua estrutura
+          params: { 
+                id: id,
+                nome: nome
+            },
+        })
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
+            <View style={{alignItems: "flex-end"}}>
+                <Button style={styles.buttonContainerAlt} icon="add-circle-outline" onPress={() => {router.push({pathname: "/home/conversaCreation"})}}/>
+            </View>
+
             <ConversationList conversas={conversas} onPressChat={handleConversationList}/>
         </View>
     );

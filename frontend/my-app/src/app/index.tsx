@@ -32,7 +32,7 @@ export default function Index() {
   }, []);
 
   if (isLogged) {
-    return <Redirect href="/app/home" />;
+    return <Redirect href="/home" />;
   } else {
     return <Redirect href="/auth/login" />;
   }

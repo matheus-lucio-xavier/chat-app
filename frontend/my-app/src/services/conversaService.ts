@@ -6,6 +6,19 @@ export const getConversas = async () => {
   return response;
 };
 
+type requestConversa = {
+    id: string
+    nome: string;
+}
+
+export const postConversasPrivado = async (userId: string, conversa: requestConversa) => {
+  const response = await api.post(`/Conversa/conversas-privado?userId=${userId}`,{
+      nome: conversa.nome
+    });
+
+  return response;
+};
+
 export const getConversaMensagens = async (conversaId: string) => {
     const response = await api.get(`/Conversa/conversas/${conversaId}/mensagens`);
 
