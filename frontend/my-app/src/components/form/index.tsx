@@ -42,7 +42,8 @@ export function Form({inputs, onSubmit, labelSubmit}: FormProps){
                     type={i.type}
                     icon={i.icon}
                     placeholder={i.placeholder}
-                    onChangeText={(text) => handleChange(i.name, text)}/>
+                    onChangeText={(text) => handleChange(i.name, text)}
+                />
             ))}
             
             <Button label={labelSubmit} onPress={handleSubmit}/>

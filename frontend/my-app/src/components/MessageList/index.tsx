@@ -24,7 +24,6 @@ type Props = {
 };
 
 export function MessageList({ mensagens = [] }: Props) {
-  console.log(mensagens)
   const data = groupMessagesByDate(mensagens ?? [])
 
   return (

@@ -1,3 +1,4 @@
+import ConversaCreation from "@/app/home/conversaCreation";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -45,11 +46,17 @@ export const styles = StyleSheet.create({
     borderColor: "#ddd",
   },
 
-  input: {
-    flex: 1,
-    backgroundColor: "#f2f2f2",
-    borderRadius: 20,
-    paddingHorizontal: 15,
+  inputAlt: {
+    width: "80%",
+    height: 50,
+    backgroundColor: "#D9D9D9",
+    borderRadius: 12,
+    marginTop: 16,
+    paddingHorizontal: 10,
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   sendButton: {

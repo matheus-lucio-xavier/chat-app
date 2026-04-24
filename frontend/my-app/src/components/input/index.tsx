@@ -16,18 +16,18 @@ export function Input({ type, icon, ...rest }: Props) {
         <View style={styles.container}>
             <View style={styles.group}>
                 <Ionicons
-                name={icon}
-                size={20}
-                color="#333333"
+                    name={icon}
+                    size={20}
+                    color="#333333"
                 />
 
                 <TextInput
-                style={styles.input}
-                placeholderTextColor="#333333"
-                secureTextEntry={type === "password" ? !showPassword : false}
-                autoCorrect={false}
-                autoCapitalize="none"
-                {...rest}
+                    style={styles.input}
+                    placeholderTextColor="#333333"
+                    secureTextEntry={type === "password" ? !showPassword : false}
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    {...rest}
                 />
             </View>
 

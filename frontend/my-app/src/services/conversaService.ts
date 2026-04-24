@@ -19,6 +19,14 @@ export const postConversasPrivado = async (userId: string, conversa: requestConv
   return response;
 };
 
+export const postConversasGrupo = async (conversa: requestConversa) => {
+  const response = await api.post('/Conversa/conversas-grupo',{
+      nome: conversa.nome
+    });
+
+  return response;
+};
+
 export const getConversaMensagens = async (conversaId: string) => {
     const response = await api.get(`/Conversa/conversas/${conversaId}/mensagens`);
 

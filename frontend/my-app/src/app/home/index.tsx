@@ -2,14 +2,21 @@ import { getUserConversas, getUsers } from "@/services/userService";
 import { useEffect, useState } from "react";
 import { View, Text, Alert, FlatList, TouchableOpacity } from "react-native";
 import { Button } from "@/components/button";
+import { Input } from "@/components/input";
 import { styles } from "@/styles/home.styles";
 import * as SecureStore from "expo-secure-store"
 import { router } from "expo-router";
 import { ConversationList } from "@/components/conversationList";
 
+type Conversa = {
+  id: string;
+  nome: string;
+};
+
 export default function Home(){
 
-    const [conversas, setConversas] = useState([])
+    const [ conversas, setConversas] = useState<Conversa[]>([])
+    const [ searchConversa, setSearchConversa] = useState("")
 
     const fetchData = async () => {
         try{
@@ -73,7 +80,19 @@ export default function Home(){
                 <Button style={styles.buttonContainerAlt} icon="add-circle-outline" onPress={() => {router.push({pathname: "/home/conversaCreation"})}}/>
             </View>
 
-            <ConversationList conversas={conversas} onPressChat={handleConversationList}/>
+            <View style={{alignItems: "center"}}>
+                <Input 
+                    type="text"
+                    icon="search"
+                    placeholder="Digite o nome da conversa"
+                    onChangeText={setSearchConversa}
+                />
+            </View>
+
+            <ConversationList 
+                conversas={conversas.filter(c => !searchConversa.trim()? true : c.nome.toLowerCase().includes(searchConversa.toLowerCase()))} 
+                onPressChat={handleConversationList}
+            />
         </View>
     );
 

@@ -5,6 +5,7 @@ import { styles } from "./styles";
 type User = {
   id: string;
   nome: string;
+  email: string;
 };
 
 type Props = {
@@ -35,7 +36,7 @@ export function UserList({ users, selectedUserId, onPressUser }: Props) {
                     isSelected && styles.userNameSelected
                     ]}
                 >
-                    {item.nome}
+                    {item.email}
                 </Text>
             </TouchableOpacity>
         )
