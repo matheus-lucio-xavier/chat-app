@@ -33,6 +33,12 @@ export const getConversaMensagens = async (conversaId: string) => {
     return response;
 }
 
+export const getConversaMembros = async (conversaId: string) => {
+    const response = await api.get(`/Conversa/conversas/${conversaId}/membros`);
+
+    return response;
+}
+
 type requestMensagem = {
     type: number;
     content: string;

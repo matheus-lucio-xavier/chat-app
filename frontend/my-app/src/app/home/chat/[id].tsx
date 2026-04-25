@@ -1,10 +1,11 @@
 import { View, Text, FlatList, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { styles } from "@/styles/home.styles";
+import { styles } from "@/styles/chat.styles";
 import { getConversaMensagens, postConversaMensagem } from "@/services/conversaService";
 import { MessageInput } from "@/components/MessageInput";
 import { MessageList } from "@/components/MessageList";
+import { Button } from "@/components/button";
 
 export default function Chat() {
     type Mensagem = {
@@ -81,7 +82,17 @@ export default function Chat() {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
             <View style={styles.container}>
-                <Text>/////{nome}/////</Text>
+                <View style={styles.headBar}>
+                    <Text style={{verticalAlign: "bottom"}}>/////{nome}\\\\\</Text>
+                    <Button style={styles.buttonContainerAlt} icon="ellipsis-horizontal" iconSize={40}
+                        onPress={() => {router.push({
+                            pathname: "/home/chat/conversaProfile/[id]", 
+                            params: { 
+                                id: id,
+                                nome: nome
+                            },
+                        })}}/>
+                </View>
 
                 {/* Scroll só nas mensagens */}
                 <MessageList mensagens={mensagens} />

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getUsers } from "@/services/userService";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
+import { router } from "expo-router";
 
 export default function ConversaCreation() {
     type User = {
@@ -65,6 +66,7 @@ export default function ConversaCreation() {
             }
         
             const response = await postConversasPrivado(userId, conversa)
+            router.dismiss()
         }catch (error: any) {
             if (error.response) {
                 // erro vindo da API (400, 401, etc)
@@ -91,6 +93,7 @@ export default function ConversaCreation() {
             }
         
             const response = await postConversasGrupo(conversa)
+            router.dismiss()
         }catch (error: any) {
             if (error.response) {
                 // erro vindo da API (400, 401, etc)

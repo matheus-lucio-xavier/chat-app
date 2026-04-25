@@ -10,11 +10,11 @@ type User = {
 
 type Props = {
   users: User[];
-  selectedUserId: string
+  selectedUserId?: string
   onPressUser: (id: string) => void;
 };
 
-export function UserList({ users, selectedUserId, onPressUser }: Props) {
+export function UserList({ users, selectedUserId = "", onPressUser }: Props) {
   return (
     <FlatList
       data={users}
