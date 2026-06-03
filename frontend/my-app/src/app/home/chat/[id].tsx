@@ -17,7 +17,7 @@ export default function Chat() {
         createdAt: string;
     };
 
-    const { id, nome } = useLocalSearchParams();
+    const { id, nome, type } = useLocalSearchParams();
     const [ inputContent, setInputContent] = useState("");
     const [ mensagens, setMensagens] = useState<Mensagem[]>([]);
 
@@ -51,7 +51,7 @@ export default function Chat() {
                 content: inputContent
             }
 
-            const response = await postConversaMensagem(id as string, mensagem)
+            await postConversaMensagem(id as string, mensagem)
         }catch (error: any) {
             if (error.response) {
                 // erro vindo da API (400, 401, etc)
@@ -91,7 +91,8 @@ export default function Chat() {
                             pathname: "/home/chat/conversaProfile/[id]", 
                             params: { 
                                 id: id as string,
-                                nome: nome
+                                nome: nome,
+                                type: type
                             },
                         })}}/>
                 </View>

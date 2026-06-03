@@ -5,11 +5,12 @@ import { styles } from "./styles";
 type Conversa = {
   id: string;
   nome: string;
+  type: number;
 };
 
 type Props = {
   conversas: Conversa[];
-  onPressChat: (id: string, nome: string) => void;
+  onPressChat: (id: string, nome: string, tipo: number) => void;
 };
 
 export function ConversationList({ conversas, onPressChat }: Props) {
@@ -20,7 +21,7 @@ export function ConversationList({ conversas, onPressChat }: Props) {
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.chatItem}
-          onPress={() => onPressChat(item.id, item.nome)}
+          onPress={() => onPressChat(item.id, item.nome, item.type)}
         >
           <Text style={styles.chatName}>{item.nome}</Text>
         </TouchableOpacity>

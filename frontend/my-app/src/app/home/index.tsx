@@ -11,6 +11,7 @@ import { ConversationList } from "@/components/conversationList";
 type Conversa = {
   id: string;
   nome: string;
+  type: number;
 };
 
 export default function Home(){
@@ -65,12 +66,13 @@ export default function Home(){
         return () => clearInterval(interval);
     }, [])
 
-    const handleConversationList = (id: string, nome: string) =>
+    const handleConversationList = (id: string, nome: string, type: number) =>
         router.push({
           pathname: "/home/chat/[id]", // ajusta conforme sua estrutura
           params: { 
                 id: id,
-                nome: nome
+                nome: nome,
+                type: type
             },
         })
 

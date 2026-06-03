@@ -52,3 +52,9 @@ export const postConversaMensagem = async (conversaId: string, mensagem: request
 
     return response;
 }
+
+export const postConversaMembro = async (conversaId: string, userId: string) => {
+    const response = await api.post(`/Conversa/conversas/${conversaId}/adcinar-membro?userId=${userId}`);
+
+    return response;
+}
