@@ -1,7 +1,7 @@
 import { styles } from "@/styles/conversaCreation.styles";
 import { Form } from "@/components/form"
 import { UserList } from "@/components/UserList"
-import { Alert, View } from "react-native";
+import { Alert, View, Text } from "react-native";
 import { postConversasGrupo, postConversasPrivado } from "@/services/conversaService";
 import { useEffect, useState } from "react";
 import { getUsers } from "@/services/userService";
@@ -83,6 +83,8 @@ export default function ConversaCreation() {
 
     const handleCreationGrupo = async () => {
         try{
+            setUserId("");
+            
             if (!inputContent.trim()) return;
         
             setInputContent("");
@@ -110,13 +112,12 @@ export default function ConversaCreation() {
 
     return (
         <View style={styles.container}>
+            <View style={styles.headBar}>
+                <Button style={styles.buttonContainerAlt2} icon="arrow-back-outline" iconSize={30}
+                    onPress={() => {router.dismiss()}}/>
+                <Text>Criando uma conversa</Text>
+            </View>
             <View style={styles.inputsContainer}>
-                <Input
-                    type="text"
-                    icon="mail"
-                    placeholder="Digite o nome da conversa"
-                    onChangeText={setInputContent}
-                />
                 <Input 
                     type="text"
                     icon="search"
@@ -134,7 +135,15 @@ export default function ConversaCreation() {
                 selectedUserId={userId}
                 onPressUser={(id) => setUserId(id)}
             />
-                
+        
+            <View style={styles.inputsContainer}>
+                <Input
+                    type="text"
+                    icon="mail"
+                    placeholder="Digite o nome da conversa"
+                    onChangeText={setInputContent}
+                />
+            </View>
             <View style={{alignItems: "center"}}>
                 <Button label="criar" onPress={handleCreationPrivado}/>
             </View>

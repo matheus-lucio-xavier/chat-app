@@ -77,7 +77,7 @@ export default function Home(){
     return (
         <View style={styles.container}>
             <View style={{alignItems: "flex-end"}}>
-                <Button style={styles.buttonContainerAlt} icon="add-circle-outline" onPress={() => {router.push({pathname: "/home/conversaCreation"})}}/>
+                <Button style={styles.buttonContainerAlt2} icon="add-circle-outline" iconSize={30} onPress={() => {router.push({pathname: "/home/conversaCreation"})}}/>
             </View>
 
             <View style={{alignItems: "center"}}>

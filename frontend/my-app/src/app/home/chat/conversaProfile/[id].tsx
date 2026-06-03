@@ -7,6 +7,7 @@ import { MessageInput } from "@/components/MessageInput";
 import { MessageList } from "@/components/MessageList";
 import { Button } from "@/components/button";
 import { UserList } from "@/components/UserList";
+import { Input } from "@/components/input";
 
 export default function ConversaProfile() {
     type User = {
@@ -17,6 +18,7 @@ export default function ConversaProfile() {
 
     const { id, nome } = useLocalSearchParams();
     const [ userMembers, setUserMembers ] = useState<User[]>([]);
+    const [ searchUser, setSearchUser ] = useState(""); 
 
     const fetchData = async () => {
         try{
@@ -47,9 +49,27 @@ export default function ConversaProfile() {
 
     return (
         <View>
-            <Text>/////{nome}\\\\\</Text>
+            <View style={styles.headBar}>
+                <Button style={styles.buttonContainerAlt2} icon="arrow-back-outline" iconSize={30}
+                    onPress={() => {router.dismiss()}}/>
+                <Text style={{verticalAlign: "bottom"}}>{nome}</Text>
+            </View>
 
-            <UserList users={userMembers} onPressUser={() => {}}/>
+            <View style={styles.inputsContainer}>
+                <Input 
+                    type="text"
+                    icon="search"
+                    placeholder="Digite o email de um usuario"
+                    onChangeText={setSearchUser}
+                />
+            </View>
+
+            <UserList users={userMembers.filter(u => !searchUser.trim()? true : u.email.toLowerCase().includes(searchUser.toLowerCase()))} onPressUser={() => {}}/>
+
+            <View style={{alignItems: "center"}}>
+                <Button style={styles.buttonContainerAlt} icon="add-outline" iconSize={30} label="Adcionar membro"
+                        onPress={() => {}}/>
+            </View>
         </View>
     );
 }

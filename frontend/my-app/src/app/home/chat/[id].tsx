@@ -83,12 +83,14 @@ export default function Chat() {
         >
             <View style={styles.container}>
                 <View style={styles.headBar}>
-                    <Text style={{verticalAlign: "bottom"}}>/////{nome}\\\\\</Text>
-                    <Button style={styles.buttonContainerAlt} icon="ellipsis-horizontal" iconSize={40}
+                    <Button style={styles.buttonContainerAlt2} icon="arrow-back-outline" iconSize={30}
+                        onPress={() => {router.dismiss()}}/>
+                    <Text style={{verticalAlign: "bottom"}}>{nome}</Text>
+                    <Button style={styles.buttonContainerAlt2} icon="ellipsis-horizontal-circle-outline" iconSize={30}
                         onPress={() => {router.push({
                             pathname: "/home/chat/conversaProfile/[id]", 
                             params: { 
-                                id: id,
+                                id: id as string,
                                 nome: nome
                             },
                         })}}/>
